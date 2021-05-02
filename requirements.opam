@@ -1,0 +1,20 @@
+opam-version: "2.0"
+maintainer: "Anthony Cuturrufo <anthonycuturrufo1@gmail.com>"
+authors: [ "Anthony Cuturrufo <anthonycuturrufo1@gmail.com>" ]
+license: "BSD-3-clause"
+homepage: "https://github.com/anthony-c-cuturrufo/Twitter_Stock_Client"
+bug-reports: "https://github.com/anthony-c-cuturrufo/Twitter_Stock_Client/issues"
+dev-repo: "git+https://github.com/anthony-c-cuturrufo/Twitter_Stock_Client.git"
+
+depends: [
+  "core" {>= "0.14.1"}
+  "csv" {>= "2.4"}
+  "ocaml" {>= "4.10.2"}
+  "cohttp-lwt-unix" {>= "2.5.4"}
+  "yojson"  {>= "1.7.0"}
+  "tls" {>= "0.12.8"}
+  "letters" {>= "0.2.1"}
+  "result"
+]
+synopsis:
+  "This program scrapes twitter handles for stock pumps. It then takes the stock and purchases it with a high-frequency trading strategy"

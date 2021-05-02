@@ -1,0 +1,23 @@
+# assignment
+_doc.public
+_doc.private
+twitter_stock_client.zip
+stocks.csv
+accounts.json
+portfolio.json
+
+# ocaml
+*.cmo
+*.cma
+*.cmi
+*.out
+*.cmx
+*.native
+*.byte
+_build
+
+# temporary files
+*.swp
+*~
+\#*\#
+.DS_Store
