@@ -1,0 +1,22 @@
+{
+  "Sentiment": {
+    "api_key": ""
+  },
+  "TD_Ameritrade": {
+    "api_key": "",
+    "refresh_token": ""
+  },
+  "Twitter": {
+    "bearer": ""
+  },
+  "Email": {
+    "address": "",
+    "password": ""
+  },
+  "Algo": {
+    "trailing_stop": 0.08,
+    "max_price": 100.0,
+    "max_volume": 500000000,
+    "strategy": "rolling_max"
+  }
+}
