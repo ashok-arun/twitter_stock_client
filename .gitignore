@@ -3,6 +3,7 @@ _doc.public
 _doc.private
 twitter_stock_client.zip
 stocks.csv
+config.json
 accounts.json
 portfolio.json
 
