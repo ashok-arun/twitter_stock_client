@@ -28,18 +28,3 @@ let send_email config email ticker =
   match mail with
   | Ok message -> send ~config ~sender ~recipients ~message
   | Error reason -> Lwt.fail_with reason
-
-(* Your Order Has Been Executed!
-
-   Hi Ashok,
-
-   Your limit order to buy 5 shares of WORK was executed at an average
-   price of $36.81 on July 1st 2019 at 2:35 PM.
-
-   Your trade confirmation will be available in your order history on
-   Robinhood in one trading day.
-
-   If you have any questions, please visit our Help Center and we’d be
-   more than happy to help!
-
-   Sincerely, *)
