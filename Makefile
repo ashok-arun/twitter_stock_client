@@ -1,4 +1,4 @@
-MODULES= sentiment twitter stock parser main email trade curl algoUtils algo trader author
+MODULES= config sentiment twitter stock parser main email trade curl algoUtils algo trader author 
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)

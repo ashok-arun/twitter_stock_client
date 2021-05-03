@@ -24,7 +24,7 @@ let of_json_string lst =
 let args =
   [
     ("IsTwitterContent", "true");
-    ("PrivateKey", "7A8ED257-F3D6-4E9D-AFA0-C73D1D9E62F7");
+    ("PrivateKey", Config.sentiment_api_key);
     ("Secret", "secret");
     ("RequestIdentifier", "");
   ]

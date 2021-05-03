@@ -7,10 +7,10 @@ let headers =
   Header.add h "Content-Type" "application/json"
 
 (* Retrieves a json object as a string of the [ticker] info*)
-let ticker_info_json ticker api_key =
+let ticker_info_json ticker =
   get_curl
-    ("https://api.tdameritrade.com/v1/marketdata/quotes?apikey="
-   ^ api_key ^ "&symbol=" ^ ticker)
+    ( "https://api.tdameritrade.com/v1/marketdata/quotes?apikey="
+    ^ Config.td_api_key ^ "&symbol=" ^ ticker )
     headers
 
 (* Gets the price history of a stock from time called. Ticker must be in
@@ -21,12 +21,11 @@ let get_price_history
     ?(period = "2")
     ?(freq_type = "minute")
     ?(freq = "1")
-    ticker
-    api_key =
+    ticker =
   let url =
     "https://api.tdameritrade.com/v1/marketdata/"
     ^ String.uppercase_ascii ticker
-    ^ "/pricehistory" ^ "?apikey=" ^ api_key ^ "&periodType="
+    ^ "/pricehistory" ^ "?apikey=" ^ Config.td_api_key ^ "&periodType="
     ^ period_type ^ "&period=" ^ period ^ "&frequencyType=" ^ freq_type
     ^ "&frequency=" ^ freq
   in
@@ -84,10 +83,12 @@ let stock_price ticker json = (from_json ticker json).price
 let stock_volume ticker json = (from_json ticker json).volume
 
 let check_price ticker json =
-  if 1000.0 >= stock_price ticker json then true else false
+  if Config.algo_max_price >= stock_price ticker json then true
+  else false
 
 let check_volume ticker json =
-  if 200000000 >= stock_volume ticker json then true else false
+  if Config.algo_max_volume >= stock_volume ticker json then true
+  else false
 
 let check_stock ticker json =
   if check_price ticker json && check_volume ticker json then true

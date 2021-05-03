@@ -1,8 +1,8 @@
 open Yojson.Basic.Util
 
-(* returns current price of [ticker] using [api_key] *)
-let get_current_price ticker api_key =
-  Stock.ticker_info_json ticker api_key |> Stock.stock_price ticker
+(* returns current price of [ticker] *)
+let get_current_price ticker =
+  Stock.ticker_info_json ticker |> Stock.stock_price ticker
 
 (* takes in json list [price_history] directly from http response and
    looks for all occuences of [tag] and returns list of values

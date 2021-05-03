@@ -8,12 +8,10 @@ let high_dictionary = Hashtbl.create 1000
 (* index of rolling max value in stocks.csv *)
 let rolling_max_index = 4
 
-(* takes in a stock [ticker] and [api_key] for TD Ameritrade and returns
-   the highest price in a period defined by *)
-let calc_rolling_max ticker api_key =
-  let highs =
-    AlgoUtils.parse (Stock.get_price_history ticker api_key) "high"
-  in
+(* takes in a stock [ticker] for TD Ameritrade and returns the highest
+   price in a period defined by *)
+let calc_rolling_max ticker =
+  let highs = AlgoUtils.parse (Stock.get_price_history ticker) "high" in
   let max_high = function
     | [] ->
         invalid_arg
@@ -23,15 +21,16 @@ let calc_rolling_max ticker api_key =
   max_high highs
 
 (* checks if [current_price] falls below the *)
-let hit_trailing_stop ?(percent = 0.08) stock current_price =
+let hit_trailing_stop stock current_price =
   let max_price = Hashtbl.find high_dictionary stock in
-  current_price < Float.sub max_price (Float.mul max_price percent)
+  current_price
+  < Float.sub max_price (Float.mul max_price Config.algo_trailing_stop)
 
 (* checks "stocks.csv" if [current_price] of [stock] passing rolling max *)
 let hit_rolling_max stock current_price =
   current_price
-  <= (member_of_last_purchase stock rolling_max_index "stocks.csv"
-     |> float_of_string)
+  <= ( member_of_last_purchase stock rolling_max_index "stocks.csv"
+     |> float_of_string )
 
 let breaks_rolling_max stock = failwith "unimplemented"
 
@@ -40,8 +39,8 @@ let breaks_rolling_max stock = failwith "unimplemented"
    for two reasons: 1. It hits rolling max. 2. It hits trailing stop
    loss. If it hits rolling max, then (true, true), if it hits trailing
    stop, then (true, false), else (false, false) *)
-let keep_stock stock api_key =
-  let current_price = AlgoUtils.get_current_price stock api_key in
+let keep_stock stock =
+  let current_price = AlgoUtils.get_current_price stock in
   AlgoUtils.log_high stock current_price high_dictionary;
   let stopped_out = hit_trailing_stop stock current_price in
   (* TODO -> deal with max not being higher than price *)

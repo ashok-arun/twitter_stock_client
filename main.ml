@@ -1,21 +1,12 @@
-open Stock
-open Trade
-open Letters
-open Str
-open Cohttp
-open Cohttp_lwt_unix
-open Yojson.Basic.Util
-open Lwt
-open Lwt.Infix
-open Str
-open Twitter
-open Sentiment
-open Json_writer
-open Email
+(* open Stock open Trade open Letters open Str open Cohttp open
+   Cohttp_lwt_unix open Yojson.Basic.Util open Lwt open Lwt.Infix open
+   Str open Twitter open Sentiment open Json_writer open Email *)
 
 (* Begin Manager to scan through every twitter account, updating tweets
    in accounts.json, and purchasing relevent stocks*)
 let () = Manager.start
+
+(* print_string (Yojson.Basic.to_string mem) *)
 
 (* let () = print_endline "Enter your email\n"; print_string "> "; let
    email = read_line () in Lwt_main.run (send_email conf email "AAPL") *)

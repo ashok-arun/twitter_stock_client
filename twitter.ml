@@ -9,8 +9,7 @@ let api_endpoint =
   "https://api.twitter.com/2/tweets/search/recent?query=from:"
 
 (* Bearer Token for Twitter API *)
-let bearer =
-  "AAAAAAAAAAAAAAAAAAAAAGgMNwEAAAAAuaQjMMqQK%2Ff1CS0jEn%2BiYSOsO1A%3DPdvmbXLNI17des2u0eSnR8b2ho4uFOtHIGnQl9Pg2iM4VmRBwa"
+let bearer = Config.twitter_bearer
 
 (* Twitter API Documentation:
    https://developer.twitter.com/en/docs/api-reference-index *)
@@ -86,8 +85,8 @@ let get_tickers tweet =
   let regex_stock = Str.regexp "[$][a-zA-Z]+" in
   let ind =
     try Str.search_forward regex_stock tweet 0 with Not_found -> -1
-    
   in
+
   if ind > -1 then
     String.sub
       (Str.matched_string tweet)

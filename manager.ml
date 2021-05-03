@@ -32,9 +32,6 @@ let start =
   print_endline "Enter your email\n";
   print_string "> ";
   let email = read_line () in
-  print_endline "Enter your TDAmeritrade APP APIKEY\n";
-  print_string "> ";
-  let apikey = read_line () in
   let rec main_driver portf new_json =
     match portf with
     | h :: t ->
@@ -51,8 +48,8 @@ let start =
         in
         let () =
           print_endline
-            (handle ^ ": " ^ tweet_prior ^ "(prior). Current: "
-           ^ current_tweet)
+            ( handle ^ ": " ^ tweet_prior ^ "(prior). Current: "
+            ^ current_tweet )
         in
         if tweet_prior = current_tweet then main_driver t final_json
         else
@@ -60,10 +57,10 @@ let start =
           if ticker = "" || is_bullish current_tweet = false then
             main_driver t final_json
           else if
-            let ticker_json = ticker_info_json ticker apikey in
+            let ticker_json = ticker_info_json ticker in
             check_stock ticker ticker_json
           then
-            let () = Trader.buy ticker apikey in
+            let () = Trader.buy ticker in
             let () =
               Lwt_main.run (send_email conf email ticker);
               print_endline (ticker ^ " bought!")
