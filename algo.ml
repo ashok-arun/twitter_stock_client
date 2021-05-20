@@ -29,10 +29,17 @@ let hit_trailing_stop stock current_price =
 (* checks "stocks.csv" if [current_price] of [stock] passing rolling max *)
 let hit_rolling_max stock current_price =
   current_price
-  <= ( member_of_last_purchase stock rolling_max_index "stocks.csv"
+  >= ( member_of_last_purchase stock rolling_max_index "stocks.csv"
      |> float_of_string )
 
-let breaks_rolling_max stock = failwith "unimplemented"
+(* considers [stock] to have "broken" rolling max if it passes with a
+   margin of [rebuy_thresh] *)
+let breaks_rolling_max ?(rebuy_thresh = 0.02) stock =
+  let rolling_max =
+    member_of_last_purchase stock rolling_max_index "stocks.csv"
+    |> float_of_string
+  in
+  get_current_price stock > rolling_max +. (rolling_max *. rebuy_thresh)
 
 (* Takes in a stock ticker and decides if it should sell. Returns
    boolean tuple (sell_stock, keep_watching). It could decide to sell

@@ -55,3 +55,11 @@ let log_high ticker current_price dict =
       Hashtbl.replace dict ticker current_price
     else ()
   else Hashtbl.add dict ticker current_price
+
+let calc_target curr_price rolling_max profit_target_const error =
+  let offset = rolling_max *. error in
+  if
+    curr_price < rolling_max +. offset
+    && curr_price > rolling_max -. offset
+  then curr_price +. (curr_price *. profit_target_const)
+  else rolling_max

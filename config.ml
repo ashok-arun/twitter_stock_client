@@ -11,6 +11,8 @@ type t = {
   algo_max_price : float;
   algo_max_volume : int;
   algo_strategy : string;
+  algo_profit_target : float;
+  algo_error_margin : float;
 }
 
 let make_config filename =
@@ -37,6 +39,10 @@ let make_config filename =
       conf |> member "Algo" |> member "max_volume" |> to_int;
     algo_strategy =
       conf |> member "Algo" |> member "strategy" |> to_string;
+    algo_profit_target =
+      conf |> member "Algo" |> member "profit_target" |> to_float;
+    algo_error_margin =
+      conf |> member "Algo" |> member "error_margin" |> to_float;
   }
 
 let config = make_config "config.json"
@@ -60,6 +66,10 @@ let algo_max_price = config.algo_max_price
 let algo_max_volume = config.algo_max_volume
 
 let algo_strategy = config.algo_strategy
+
+let algo_profit_target = config.algo_profit_target
+
+let algo_error_margin = config.algo_error_margin
 
 (* checks if configs are good *)
 let check_configs () =
