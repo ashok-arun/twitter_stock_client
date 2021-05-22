@@ -5,18 +5,38 @@
   "TD_Ameritrade": {
     "api_key": "",
     "refresh_token": ""
+    "refresh_date": ""
+    "bearer": "leave empty"
+    "bearer_date": "leave empty"
   },
   "Twitter": {
-    "bearer": ""
+    "bearer": "",
+    "accounts": [
+    {
+      "handle": "elonmusk",
+      "last_tweet": ""
+    },
+    {
+      "handle": "3110Project",
+      "last_tweet": ""
+    },
+    {
+      "handle": "Burns277",
+      "last_tweet": ""
+    }
+  ]
   },
   "Email": {
     "address": "",
-    "password": ""
+    "password": "",
+    "address_destination": ""
   },
   "Algo": {
     "trailing_stop": 0.08,
     "max_price": 100.0,
     "max_volume": 500000000,
-    "strategy": "rolling_max"
+    "strategy": "rolling_max",
+    "profit_target": 0.1,
+    "error_margin": 0.015
   }
 }
